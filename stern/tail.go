@@ -205,6 +205,9 @@ func (t *Tail) Print(msg string) {
 	if strings.Contains(msg, "DEBUG") {
 		msgColor = color.New(color.FgCyan)
 	}
+	if strings.Contains(msg, "WARN") {
+		msgColor = color.New(color.FgYellow)
+	}	
 	if strings.Contains(msg, "ERROR") {
 		msgColor = color.New(color.FgRed)
 	}	
