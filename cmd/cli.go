@@ -246,7 +246,7 @@ func parseConfig(args []string) (*stern.Config, error) {
 					t = fmt.Sprintf("{{.Namespace}} %s", t)
 				}
 			} else {
-				t = "{{color .PodColor .PodName}} {{color .ContainerColor .ContainerName}} {{.Message}}"
+				t = "{{color .PodColor .PodName}} {{color .ContainerColor .ContainerName}} {{color .MsgColor .Message}}"
 				if opts.allNamespaces || len(opts.namespaces) > 1 {
 					t = fmt.Sprintf("{{color .PodColor .Namespace}} %s", t)
 				}

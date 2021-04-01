@@ -201,6 +201,14 @@ func (t *Tail) ConsumeRequest(ctx context.Context, request rest.ResponseWrapper)
 
 // Print prints a color coded log message with the pod and container names
 func (t *Tail) Print(msg string) {
+	msgColor := color.New(color.FgGreen)
+	if strings.Contains(msg, "DEBUG") {
+		msgColor = color.New(color.FgCyan)
+	}
+	if strings.Contains(msg, "ERROR") {
+		msgColor = color.New(color.FgRed)
+	}	
+
 	vm := Log{
 		Message:        msg,
 		NodeName:       t.NodeName,
@@ -209,8 +217,10 @@ func (t *Tail) Print(msg string) {
 		ContainerName:  t.ContainerName,
 		PodColor:       t.podColor,
 		ContainerColor: t.containerColor,
+		MsgColor:		msgColor,
 	}
 
+	
 	var buf bytes.Buffer
 	if err := t.tmpl.Execute(&buf, vm); err != nil {
 		fmt.Fprintf(t.errOut, "expanding template failed: %s\n", err)
@@ -245,4 +255,5 @@ type Log struct {
 
 	PodColor       *color.Color `json:"-"`
 	ContainerColor *color.Color `json:"-"`
+	MsgColor *color.Color `json:"-"`
 }
