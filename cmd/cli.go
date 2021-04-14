@@ -68,7 +68,7 @@ var opts = &Options{
 	containerState: "running",
 	initContainers: true,
 	tail:           -1,
-	color:          "auto",
+	color:          "always",
 	template:       "",
 	output:         "default",
 }
